@@ -75,8 +75,10 @@
         'managed': {},
     },
     'proxy': {
-        'proxy_cache_path': '/var/run/nginx-cache keys_zone=cache:100m',
-        'opts': {},
+        'config': {
+          'proxy_cache_path': '/var/run/nginx-cache keys_zone=cache:100m',
+          'opts': {},
+          },
     },
 }, merge=True) %}
 
