@@ -78,6 +78,7 @@
       'opts': {},
         'config': {
           'proxy_cache_path': '/var/run/nginx-cache keys_zone=cache:100m',
+          'log_format': 'cache_status \'[$time_local] "$request"  $upstream_cache_status\'',
           },
     },
 }, merge=True) %}
