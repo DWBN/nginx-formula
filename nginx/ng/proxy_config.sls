@@ -7,7 +7,7 @@
 
 proxy_conf:
   file.managed:
-    {{ sls_block(nginx.proxy_opts) }}
+    {{ sls_block(nginx.proxy) }}
     - name: /etc/nginx/proxy.conf
     - source: salt://nginx/ng/files/proxy.conf
     - template: jinja
