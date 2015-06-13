@@ -12,6 +12,6 @@ proxy_conf:
     - source: salt://nginx/ng/files/proxy.conf
     - template: jinja
     - context:
-        config: {{ nginx.proxy.config|json() }}
+        config: {{ nginx.proxy|json() }}
 
 
