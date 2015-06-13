@@ -55,6 +55,7 @@
                 'gzip': 'off',
                 'gzip_disable': '"msie6"',
                 'include': [
+                    '/etc/nginx/proxy.conf',
                     '/etc/nginx/mime.types',
                     '/etc/nginx/conf.d/*.conf',
                     '/etc/nginx/sites-enabled/*',
@@ -71,6 +72,15 @@
             'makedirs': True,
         },
         'managed': {},
+    },
+    'proxy': {
+        'path': '.disabled',
+        'and ': {},
+        'opts': {},
+        'more': {},
+        'ops': {
+            'makedirs': True,
+        },
     },
 }, merge=True) %}
 
