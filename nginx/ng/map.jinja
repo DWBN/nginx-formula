@@ -65,10 +65,12 @@
                 'gzip': 'off',
                 'gzip_disable': '"msie6"',
                 'include': [
+                    '/etc/nginx/proxy.conf',
                     '/etc/nginx/mime.types',
                     '/etc/nginx/conf.d/*.conf',
                     '/etc/nginx/sites-enabled/*',
                 ],
+
             },
         },
     },
@@ -81,6 +83,13 @@
             'makedirs': True,
         },
         'managed': {},
+    },
+    'proxy': {
+      'opts': {},
+        'config': {
+          'proxy_cache_path': '/var/run/nginx-cache keys_zone=cache:100m',
+          'log_format': 'cache_status \'[$time_local] "$request"  $upstream_cache_status\'',
+          },
     },
 }, merge=True) %}
 
