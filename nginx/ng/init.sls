@@ -7,6 +7,7 @@ include:
   - nginx.ng.service
   - nginx.ng.vhosts
   - nginx.ng.certificates
+  - nginx.ng.proxy_config
 
 extend:
   nginx_service:
