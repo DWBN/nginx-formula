@@ -35,6 +35,8 @@ nginx:
       vhost_available: /etc/nginx/sites-available
       vhost_enabled: /etc/nginx/sites-enabled
       vhost_use_symlink: True
+      # This is required for RedHat like distros (Amazon Linux) that don't follow semantic versioning for $releasever
+      rh_os_releasever: '6'
 
     # Source compilation is not currently a part of nginx.ng
     from_source: False
@@ -74,7 +76,8 @@ nginx:
       managed:
         mysite: # relative pathname of the vhost file
           # may be True, False, or None where True is enabled, False, disabled, and None indicates no action
-          dir: /tmp # an alternate directory (not sites-available) where this vhost may be found
+          available_dir: /tmp/sites-available # an alternate directory (not sites-available) where this vhost may be found
+          enabled_dir: /tmp/sites-enabled # an alternate directory (not sites-available) where this vhost may be found
           disabled_name: mysite.aint_on # an alternative disabled name to be use when not symlinking
           enabled: True
           
@@ -106,3 +109,23 @@ nginx:
           #        test something else;
           #    }
           # }         
+
+    # If you're doing SSL termination, you can deploy certificates this way.
+    # The private one(s) should go in a separate pillar file not in version
+    # control (or use encrypted pillar data).
+    certificates:
+      'www.example.com':
+        public_cert: |
+          -----BEGIN CERTIFICATE-----
+          (Your Primary SSL certificate: www.example.com.crt)
+          -----END CERTIFICATE-----
+          -----BEGIN CERTIFICATE-----
+          (Your Intermediate certificate: ExampleCA.crt)
+          -----END CERTIFICATE-----
+          -----BEGIN CERTIFICATE-----
+          (Your Root certificate: TrustedRoot.crt)
+          -----END CERTIFICATE-----
+        private_key: |
+          -----BEGIN RSA PRIVATE KEY-----
+          (Your Private Key: www.example.com.key)
+          -----END RSA PRIVATE KEY-----
