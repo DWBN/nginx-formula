@@ -1,6 +1,6 @@
-# nginx.ng.proxy
-#
-# Manages the main nginx server proxy configuration file.
+include:
+  - nginx.ng.service
+
 
 {% from 'nginx/ng/map.jinja' import nginx, sls_block with context %}
 
@@ -13,5 +13,6 @@ proxy_conf:
     - template: jinja
     - context:
         config: {{ nginx.proxy.config|json() }}
-
+    - watch_in:
+      - service: nginx_service
 

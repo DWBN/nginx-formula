@@ -14,10 +14,8 @@ extend:
     service:
       - watch:
         - file: nginx_config
-        - file: proxy_conf
       - require:
         - file: nginx_config
-        - file: proxy_conf
   nginx_config:
     file:
       - require:
