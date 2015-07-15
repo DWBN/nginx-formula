@@ -1,7 +1,20 @@
 include:
   - nginx.ng.service
 
+
+
 {%- for domain in salt['pillar.get']('nginx:ng:certificates', {}).keys() %}
+
+
+nginx_{{ domain }}_dh_parameters:
+  file.managed:
+    - name: /etc/nginx/ssl/{{ domain }}-dh_params.pem
+    - makedirs: True
+    - contents_pillar: nginx:ng:certificates:{{ domain }}:dh_params
+    - watch_in:
+      - service: nginx_service
+
+
 
 nginx_{{ domain }}_ssl_certificate:
   file.managed:
