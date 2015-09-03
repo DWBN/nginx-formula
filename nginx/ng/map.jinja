@@ -112,11 +112,13 @@
           'log_format': 'cache_status \'[$time_local] "$request"  $upstream_cache_status\'',
           'log_format': 'graylog2_format \'$remote_addr - $remote_user [$time_local] \"$request\" $status $body_bytes_sent \"$http_referer\" \"$http_user_agent\" \"$http_x_forwarded_for\" <msec=$msec|connection=$connection|connection_requests=$connection_requests|millis=$request_time>\''
           },
+        },
     'badbot': {
       'config': {
         'source_url': 'https://raw.githubusercontent.com/mariusv/nginx-badbot-blocker/e3020cd3c5e616a931089254064cd3067a8e27c2/blacklist.conf',
         'source_hash': 'md5=79A84C2F50FC0CB3AD29A15343178804',
         },
+    },
 }, merge=True) %}
 
 {% if 'user' not in nginx.server.config %}
