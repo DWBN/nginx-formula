@@ -1,12 +1,16 @@
 include:
   - nginx.ng.service
 
+
+{% from 'nginx/ng/map.jinja' import nginx, sls_block with context %}
+
+
 /etc/nginx/conf.d/blacklist.conf
   file.managed:
-    - source: https://raw.githubusercontent.com/mariusv/nginx-badbot-blocker/master/blacklist.conf
+    - source: {{ nginx.ng.badbots.config.source_url }}
     - user: root
     - group: root
     - mode: 644
-    - source_hash: md5=79A84C2F50FC0CB3AD29A15343178804
+    - source_hash: {{ nginx.ng.badbots.config.source_hash }}
     - watch_in:
       - service: nginx_service
