@@ -5,7 +5,7 @@ include:
 {% from 'nginx/ng/map.jinja' import nginx, sls_block with context %}
 
 
-/etc/nginx/conf.d/blacklist.conf
+/etc/nginx/conf.d/blacklist.conf:
   file.managed:
     - source: {{ nginx.badbot.config.source_url }}
     - user: root
