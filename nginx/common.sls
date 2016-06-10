@@ -9,7 +9,7 @@
     - directory
     - user: {{ nginx_map.default_user }}
     - group: {{ nginx_map.default_group }}
-    - mode: 2775
+    - mode: 0775
     - makedirs: True
 
 /usr/share/nginx:
