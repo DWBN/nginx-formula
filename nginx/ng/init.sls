@@ -1,7 +1,6 @@
 # nginx.ng
 #
 # Meta-state to fully install nginx.
-{% set conf_dir = nginx.get('conf_dir', '/etc/nginx') -%}
 
 
 include:
