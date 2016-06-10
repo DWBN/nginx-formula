@@ -1,7 +1,6 @@
 # nginx.ng.vhosts
 #
 # Manages virtual hosts and their relationship to the nginx service.
-{% set home = nginx.get('home', '/var/www') -%}
 
 {% from 'nginx/ng/map.jinja' import nginx, sls_block with context %}
 {% from 'nginx/ng/vhosts_config.sls' import vhost_states with context %}
@@ -32,10 +31,10 @@ nginx_service_reload:
 {% endif %}
 
 
-{{ home }}:
+/var/www:
   file:
     - directory
-    - user: {{ nginx_map.default_user }}
-    - group: {{ nginx_map.default_group }}
+    - user: www-data
+    - group: www-data
     - mode: 2775
     - makedirs: True
