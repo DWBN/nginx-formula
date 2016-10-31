@@ -1,3 +1,4 @@
+{% from 'nginx/ng/map.jinja' import nginx, sls_block with context %}
 /var/log/nginx/*.log {
 	weekly
 	missingok
@@ -5,7 +6,11 @@
 	compress
 	delaycompress
 	notifempty
-	create 0640 www-data adm
+{%- if salt['pillar.get']('nginx:ng:server:config:user') %}
+	create 0640 {{ salt['pillar.get']('nginx:ng:server:config:user') }} adm
+{% else %}
+	create 0640 {{ nginx.lookup.webuser }} adm
+{% endif %}
 	sharedscripts
 	prerotate
 		if [ -d /etc/logrotate.d/httpd-prerotate ]; then \
